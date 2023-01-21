@@ -59,6 +59,7 @@ sensor:
       - name: "My Custom Pressure Sensor"
         unit_of_measurement: hPa
         accuracy_decimals: 2
+        id: pres
   - platform: sht3xd
     temperature:
       id: temp
@@ -109,12 +110,12 @@ font:
     id: unit
     size: 9
     glyphs: |
-      !"%°RHF pmgµ³/
+      !"%°RHFP hapmgµ³/
   - file: "font/Roboto-Light.ttf"
     id: label
     size: 10
     glyphs: |
-      HTPCDOM25 abcdeilmnoprstuxy.
+      HTPCDOM25 abcdeilmnoprstuxyh.
   - file: "font/materialdesignicons.ttf"
     id: icon
     size: 20
@@ -151,6 +152,11 @@ display:
           it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.0f", id(pm25).state);
           it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "µg/m³");
           it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "PM2.5");
+      - id: page5
+        lambda: |-
+          it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.0f", id(pres).state);
+          it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "hPa");
+          it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "Pressure");
 
 interval:
   - interval: 8s
