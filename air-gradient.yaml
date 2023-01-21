@@ -46,6 +46,7 @@ uart:
     baud_rate: 9600
     id: uart2
 
+
 sensor:
   - platform: custom
     lambda: |-
@@ -53,13 +54,19 @@ sensor:
       App.register_component(my_sensor);
       return {my_sensor->temperature_sensor, my_sensor->pressure_sensor};
     sensors:
-      - name: "My Custom Temperature Sensor"
+      - name: "LPS22 Temperature"
         unit_of_measurement: °C
         accuracy_decimals: 1
-      - name: "My Custom Pressure Sensor"
+      - name: "Pressure"
         unit_of_measurement: hPa
         accuracy_decimals: 2
         id: pres
+  - platform: template
+    name: "Pressure Above Sea Level"
+    unit_of_measurement: hPa
+    accuracy_decimals: 2
+    lambda: !lambda |-
+      return(id(pres).state - 1013.25);
   - platform: sht3xd
     temperature:
       id: temp
