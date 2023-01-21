@@ -1,7 +1,16 @@
 # Air-Gradient-Extended
 Using Air Gradient DIY kits and EspHome, with some additional sensors added in (TVOC and Pressure)
 
-## 
+- LPS22
+- SGP30
+- SHT3XD
+- PMSX003
+- Senseair S8
+
+
+## Additional Sensors
+- LPS22
+- SGP30
 
 ## File Layout
 
