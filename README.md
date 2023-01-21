@@ -14,3 +14,7 @@ Using Air Gradient DIY kits and EspHome, with some additional sensors added in (
 - [Adafruit_Sensor](https://github.com/adafruit/Adafruit_Sensor.git)
 - [Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO.git)
 - [Adafruit_LPS2x](https://github.com/adafruit/Adafruit_LPS2X.git)
+
+## Resources:
+
+- [Custom Sensor Documentation](https://esphome.io/components/sensor/custom.html)
