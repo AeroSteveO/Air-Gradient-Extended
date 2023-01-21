@@ -1,0 +1,159 @@
+esphome:
+  name: "air-gradient-02"
+  includes:
+    - sensor_lps22.h
+  libraries:
+    - SPI
+    - Wire
+    - Adafruit_Sensor=https://github.com/adafruit/Adafruit_Sensor.git
+    - Adafruit_BusIO=https://github.com/adafruit/Adafruit_BusIO.git
+    - Adafruit_LPS2x=https://github.com/adafruit/Adafruit_LPS2X.git
+    
+esp8266:
+  board: esp01_1m
+
+# Enable logging
+logger:
+
+# Enable Home Assistant API
+api:
+
+ota:
+
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  # Enable fallback hotspot (captive portal) in case wifi connection fails
+  ap:
+    ssid: "Esphome-Web-12B975"
+    password: "b1rpdNSj1iwu"
+
+captive_portal:
+    
+i2c:
+  sda: 04
+  scl: 05
+
+uart:
+  - rx_pin: 14
+    tx_pin: 12
+    baud_rate: 9600
+    id: uart1
+  - rx_pin: 02
+    tx_pin: 00
+    baud_rate: 9600
+    id: uart2
+
+sensor:
+  - platform: custom
+    lambda: |-
+      auto my_sensor = new SensorLps22();
+      App.register_component(my_sensor);
+      return {my_sensor->temperature_sensor, my_sensor->pressure_sensor};
+    sensors:
+      - name: "My Custom Temperature Sensor"
+        unit_of_measurement: °C
+        accuracy_decimals: 1
+      - name: "My Custom Pressure Sensor"
+        unit_of_measurement: hPa
+        accuracy_decimals: 2
+  - platform: sht3xd
+    temperature:
+      id: temp
+      name: "Temperature"
+    humidity:
+      id: humidity
+      name: "Humidity"
+    address: 0x44
+    update_interval: 5s
+  - platform: pmsx003
+    type: PMSX003
+    uart_id: uart1
+    pm_1_0:
+      name: "Particulate Matter <1.0µm Concentration"
+      id: pm10
+      filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
+    pm_2_5:
+      name: "Particulate Matter <2.5µm Concentration"
+      id: pm25
+      filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
+    pm_10_0:
+      name: "Particulate Matter <10.0µm Concentration"
+      id: pm100
+      filters:
+      - sliding_window_moving_average:
+          window_size: 5
+          send_every: 5
+  - platform: senseair
+    uart_id: uart2
+    co2:
+      id: co2
+      name: "SenseAir CO2 Value"
+    update_interval: 20s
+
+font:
+  - file: "font/productsans.ttf"
+    id: product
+    size: 18
+    glyphs: |
+      0123456789 .
+  - file: "font/Roboto-Light.ttf"
+    id: unit
+    size: 9
+    glyphs: |
+      !"%°RHF pmgµ³/
+  - file: "font/Roboto-Light.ttf"
+    id: label
+    size: 10
+    glyphs: |
+      HTPCDOM25 abcdeilmnoprstuxy.
+  - file: "font/materialdesignicons.ttf"
+    id: icon
+    size: 20
+    glyphs: [
+      "󰟤", #CO2
+      "󰽕", #home thermometer outline
+      "󰖎", #water percent
+      "󱞙", #smoke
+    ]
+
+display:
+  - platform: ssd1306_i2c
+    model: "SSD1306 64x48"
+    rotation: "180°"
+    id: main_screen
+    pages:
+      - id: page1
+        lambda: |-
+          it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.1f", (id(temp).state * 1.8) + 32);
+          it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "°F");
+          it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "Temperature");
+      - id: page2
+        lambda: |-
+          it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.1f", id(humidity).state);
+          it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "%% RH");
+          it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "Humidity");
+      - id: page3
+        lambda: |-
+          it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.0f", id(co2).state);
+          it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "ppm");
+          it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "CO2");
+      - id: page4
+        lambda: |-
+          it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.0f", id(pm25).state);
+          it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "µg/m³");
+          it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "PM2.5");
+
+interval:
+  - interval: 8s
+    then:
+      - display.page.show_next: main_screen
+      - component.update: main_screen
