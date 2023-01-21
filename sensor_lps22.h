@@ -61,7 +61,7 @@ class SensorLps22 : public PollingComponent, public Sensor {
         float temperature = temp.temperature;
         temperature_sensor->publish_state(temperature);
 
-        int pres = pressure.pressure;
+        float pres = pressure.pressure;
         pressure_sensor->publish_state(pres);
         delay(100);
   }
