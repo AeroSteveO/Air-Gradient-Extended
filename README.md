@@ -23,6 +23,13 @@ Using Air Gradient DIY kits and EspHome, with some additional sensors added in (
 - [Adafruit_BusIO](https://github.com/adafruit/Adafruit_BusIO.git)
 - [Adafruit_LPS2x](https://github.com/adafruit/Adafruit_LPS2X.git)
 
+## Case:
+
+I used the vented case for my builds, and used the temperature probe tower from the airgradient official case design.
+
+- [Vented Case](https://www.printables.com/model/273756-vented-airgradiant-enclosure)
+- [Standard Case](https://www.airgradient.com/open-airgradient/instructions/diy/diy_3d_new.zip)
+
 ## Resources:
 
 - [Custom Sensor Documentation](https://esphome.io/components/sensor/custom.html)
