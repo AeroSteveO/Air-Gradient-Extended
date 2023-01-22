@@ -5,8 +5,8 @@ Using Air Gradient DIY kits with some additional sensors added in (TVOC and Pres
 - SHT3XD
 - PMSX003
 - Senseair S8
-- LPS22
-- SGP30
+- [LPS22 (Purple Plate is what I used)](https://www.aliexpress.us/item/3256804423878004.html)
+- [SGP30](https://www.aliexpress.us/item/2255801057593796.html)
 
 ## Monitored Values:
 - CO2
