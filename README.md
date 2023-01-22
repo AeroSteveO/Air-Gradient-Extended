@@ -1,15 +1,22 @@
 # Air-Gradient-Extended
-Using Air Gradient DIY kits and EspHome, with some additional sensors added in (TVOC and Pressure)
+Using Air Gradient DIY kits with some additional sensors added in (TVOC and Pressure). Flashed using EspHome for monitoring and pushing data to home assistant.
 
-## Air-Gradient DIY Baseline Sensors
+## Sensors:
 - SHT3XD
 - PMSX003
 - Senseair S8
-
-
-## Additional Sensors
 - LPS22
 - SGP30
+
+## Monitored Values:
+- CO2
+- eCO2
+- TVOC
+- Temperature (LPS22 and SHT3XD)
+- PM1.0
+- PM2.5
+- PM10
+- Atmospheric Pressure
 
 ## File Layout
 
