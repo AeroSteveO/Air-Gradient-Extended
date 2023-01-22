@@ -19,7 +19,7 @@ Using Air Gradient DIY kits with some additional sensors added in (TVOC and Pres
 - Atmospheric Pressure
 
 ## File Layout
-
+The fonts used by this will have to be acquired elsewhere. They and the sensor source code files will need to be put in home assistant at the following paths. This can be done using the Visual Studio Code addon for home assistant which provides a nice IDE to use.
 - /config/esphome/sensor_lps22.h
 - /config/esphome/font/productsans.ttf
 - /config/esphome/font/Roboto-Light.ttf
