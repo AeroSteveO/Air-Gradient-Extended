@@ -40,3 +40,4 @@ I used the vented case for my builds, and used the temperature probe tower from 
 ## Resources:
 
 - [Custom Sensor Documentation](https://esphome.io/components/sensor/custom.html)
+- [Adafruit LPS22 Documentation](https://learn.adafruit.com/adafruit-lps25-pressure-sensor)
