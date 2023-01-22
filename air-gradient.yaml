@@ -20,6 +20,8 @@ api:
 
 ota:
 
+dashboard_import:
+  package_import_url: github://AeroSteveO/Air-Gradient-Extended/air-gradient.yaml
 
 wifi:
   ssid: !secret wifi_ssid
