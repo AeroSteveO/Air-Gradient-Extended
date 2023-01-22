@@ -1,5 +1,5 @@
 esphome:
-  name: "air-gradient-02"
+  name: "air-gradient-01"
   includes:
     - sensor_lps22.h
   libraries:
@@ -8,7 +8,7 @@ esphome:
     - Adafruit_Sensor=https://github.com/adafruit/Adafruit_Sensor.git
     - Adafruit_BusIO=https://github.com/adafruit/Adafruit_BusIO.git
     - Adafruit_LPS2x=https://github.com/adafruit/Adafruit_LPS2X.git
-    
+
 esp8266:
   board: esp01_1m
 
@@ -27,8 +27,8 @@ wifi:
 
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
-    ssid: "Esphome-Web-12B975"
-    password: "b1rpdNSj1iwu"
+    ssid: "Esphome-Web-ABCDEFG"
+    password: "password_here"
 
 captive_portal:
     
@@ -45,7 +45,6 @@ uart:
     tx_pin: 00
     baud_rate: 9600
     id: uart2
-
 
 sensor:
   - platform: custom
@@ -76,6 +75,25 @@ sensor:
       name: "Humidity"
     address: 0x44
     update_interval: 5s
+  - platform: sgp30
+    eco2:
+      id: wco2
+      name: "eCO2"
+      accuracy_decimals: 1
+    tvoc:
+      id: tvoc
+      name: "TVOC"
+      accuracy_decimals: 1
+    store_baseline: yes
+    address: 0x58
+    update_interval: 1s
+    compensation:
+      temperature_source: temp
+      humidity_source: humidity
+    eco2_baseline:
+      name: "eCO2 Baseline"
+    tvoc_baseline:
+      name: "TVOC Baseline"
   - platform: pmsx003
     type: PMSX003
     uart_id: uart1
@@ -106,7 +124,7 @@ sensor:
       id: co2
       name: "SenseAir CO2 Value"
     update_interval: 20s
-
+    
 font:
   - file: "font/productsans.ttf"
     id: product
@@ -117,21 +135,12 @@ font:
     id: unit
     size: 9
     glyphs: |
-      !"%°RHFP hapmgµ³/
+      !"%°RPHF hpabmgµ³/
   - file: "font/Roboto-Light.ttf"
     id: label
     size: 10
     glyphs: |
-      HTPCDOM25 abcdeilmnoprstuxyh.
-  - file: "font/materialdesignicons.ttf"
-    id: icon
-    size: 20
-    glyphs: [
-      "󰟤", #CO2
-      "󰽕", #home thermometer outline
-      "󰖎", #water percent
-      "󱞙", #smoke
-    ]
+      HTPCVDOM25 abcdeilmnoprstuxy.
 
 display:
   - platform: ssd1306_i2c
@@ -160,6 +169,11 @@ display:
           it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "µg/m³");
           it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "PM2.5");
       - id: page5
+        lambda: |-
+          it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.0f", id(tvoc).state);
+          it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "ppb");
+          it.printf(5, 2, id(label), TextAlign::TOP_LEFT, "TVOC");
+      - id: page6
         lambda: |-
           it.printf(39, 45, id(product), TextAlign::BOTTOM_RIGHT, "%.0f", id(pres).state);
           it.printf(39, 32, id(unit), TextAlign::BOTTOM_LEFT, "hPa");
