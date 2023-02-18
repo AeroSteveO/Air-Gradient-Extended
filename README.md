@@ -18,6 +18,20 @@ Using Air Gradient DIY kits with some additional sensors added in (TVOC and Pres
 - PM10
 - Atmospheric Pressure
 
+## Wiring in the SGP30 & LPS22
+
+- LPS22
+  - LPS22 SDI to AirGradient SDA
+  - LPS22 SCK to AirGradient SDC
+  - LPS22 3v to AirGradient 3v
+  - LPS22 GND to AirGradient GND
+
+- SGP30
+  - VIN to AirGradient 3v
+  - GND to AirGradient GND
+  - SCL to AirGradient SDC
+  - SDA to AirGradient SDA
+
 ## File Layout
 The fonts used by this will have to be acquired elsewhere. They and the sensor source code files will need to be put in home assistant at the following paths. This can be done using the Visual Studio Code addon for home assistant which provides a nice IDE to use.
 - /config/esphome/sensor_lps22.h
