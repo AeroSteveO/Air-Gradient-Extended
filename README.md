@@ -19,7 +19,7 @@ Using Air Gradient DIY kits with some additional sensors added in (TVOC and Pres
 - Atmospheric Pressure
 
 ## Wiring in the SGP30 & LPS22
-
+These both get wired entirely into the AirGradient's I2C block of through holes.
 - LPS22
   - LPS22 SDI to AirGradient SDA
   - LPS22 SCK to AirGradient SDC
