@@ -48,6 +48,10 @@ uart:
     baud_rate: 9600
     id: uart2
 
+binary_sensor:
+  - platform: status
+    name: "Air Gradient Status"
+    
 sensor:
   - platform: custom
     lambda: |-
