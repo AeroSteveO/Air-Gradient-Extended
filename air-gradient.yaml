@@ -42,16 +42,16 @@ uart:
   - rx_pin: 14
     tx_pin: 12
     baud_rate: 9600
-    id: uart1
+    id: uart_1
   - rx_pin: 02
     tx_pin: 00
     baud_rate: 9600
-    id: uart2
+    id: uart_2
 
 binary_sensor:
   - platform: status
     name: "Air Gradient Status"
-    
+
 sensor:
   - platform: custom
     lambda: |-
@@ -100,9 +100,10 @@ sensor:
       name: "eCO2 Baseline"
     tvoc_baseline:
       name: "TVOC Baseline"
+
   - platform: pmsx003
     type: PMSX003
-    uart_id: uart1
+    uart_id: uart_1
     pm_1_0:
       name: "Particulate Matter <1.0µm Concentration"
       id: pm10
@@ -125,12 +126,12 @@ sensor:
           window_size: 5
           send_every: 5
   - platform: senseair
-    uart_id: uart2
+    uart_id: uart_2
     co2:
       id: co2
       name: "SenseAir CO2 Value"
     update_interval: 20s
-    
+
 font:
   - file: "font/productsans.ttf"
     id: product
