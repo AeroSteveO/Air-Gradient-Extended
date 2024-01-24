@@ -19,8 +19,8 @@ class LPS22Sensor : public sensor::Sensor, public PollingComponent, public i2c::
   void set_pressure_sensor(sensor::Sensor *pressure_sensor_) { pressure_sensor = pressure_sensor_; }
   
   Adafruit_LPS22 lps;
-  Sensor *temperature_sensor = new Sensor();
-  Sensor *pressure_sensor = new Sensor();
+  Sensor *temperature_sensor{nullptr}; // = new Sensor();
+  Sensor *pressure_sensor{nullptr}; // = new Sensor();
   SensorLps22() : PollingComponent(15000) { }
   
   void setup() override;
