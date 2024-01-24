@@ -1,7 +1,5 @@
 esphome:
   name: "air-gradient-01"
-  includes:
-    - sensor_lps22.h
   libraries:
     - SPI
     - Wire
