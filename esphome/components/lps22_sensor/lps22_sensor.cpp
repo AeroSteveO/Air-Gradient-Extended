@@ -48,7 +48,15 @@ void LPS22Sensor::update(){
 }
 
 void LPS22Sensor::dump_config(){
+  ESP_LOGCONFIG(TAG, "LPS22:");
+  LOG_I2C_DEVICE(this);
+  if (this->is_failed()) {
+    ESP_LOGE(TAG, "Communication with LPS22 failed!");
+  }
+  LOG_UPDATE_INTERVAL(this);
 
+  LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
+  LOG_SENSOR("  ", "Pressure", this->pressure_sensor);
 }
 
 }  // namespace LPS22Sensor
