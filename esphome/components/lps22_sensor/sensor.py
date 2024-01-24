@@ -35,16 +35,16 @@ CONFIG_SCHEMA = (
     .extend(cv.polling_component_schema("60s"))
     .extend(i2c.i2c_device_schema(0x44))
 )
-def to_code(config):
+async def to_code(config):
     var = cg.new_Pvariable(config[CONF_ID])
     yield cg.register_component(var, config)
     yield sensor.register_sensor(var, config)
     yield i2c.register_i2c_device(var, config)
 
     if CONF_TEMPERATURE in config:
-        sens = sensor.new_sensor(config[CONF_TEMPERATURE])
+        sens = await sensor.new_sensor(config[CONF_TEMPERATURE])
         cg.add(var.set_temperature_sensor(sens))
 
     if CONF_PRESSURE in config:
-        sens = sensor.new_sensor(config[CONF_PRESSURE])
+        sens = await sensor.new_sensor(config[CONF_PRESSURE])
         cg.add(var.set_pressure_sensor(sens))
