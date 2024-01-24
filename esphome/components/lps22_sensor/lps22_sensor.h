@@ -4,19 +4,11 @@
 #include "esphome/components/sensor/sensor.h"
 #include "esphome/components/i2c/i2c.h"
 
-//#include "esphome.h"
 // ...
 // Basic demo for pressure readings from Adafruit LPS2X
 #include <Wire.h>
 #include <Adafruit_LPS2X.h>
 #include <Adafruit_Sensor.h>
-
-// For SPI mode, we need a CS pin
-#define LPS_CS 10
-// For software-SPI mode we need SCK/MOSI/MISO pins
-#define LPS_SCK 13
-#define LPS_MISO 12
-#define LPS_MOSI 11
 
 namespace esphome {
 namespace lps22_sensor {
