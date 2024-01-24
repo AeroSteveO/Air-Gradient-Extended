@@ -40,3 +40,11 @@ def to_code(config):
     yield cg.register_component(var, config)
     yield sensor.register_sensor(var, config)
     yield i2c.register_i2c_device(var, config)
+
+    if CONF_TEMPERATURE in config:
+        sens = await sensor.new_sensor(config[CONF_TEMPERATURE])
+        cg.add(var.set_temperature_sensor(sens))
+
+    if CONF_PRESSURE in config:
+        sens = await sensor.new_sensor(config[CONF_PRESSURE])
+        cg.add(var.set_pressure_sensor(sens))
