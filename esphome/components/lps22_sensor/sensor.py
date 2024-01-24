@@ -24,7 +24,7 @@ CONFIG_SCHEMA = (
                 state_class=STATE_CLASS_MEASUREMENT,
             ),
             cv.Required(CONF_PRESSURE): sensor.sensor_schema(
-                unit_of_measurement=UNIT_HPA,
+                unit_of_measurement=UNIT_HECTOPASCAL,
                 accuracy_decimals=1,
                 device_class=DEVICE_CLASS_PRESSURE,
                 state_class=STATE_CLASS_MEASUREMENT,
