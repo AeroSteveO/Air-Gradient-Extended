@@ -55,7 +55,7 @@ void LPS22Sensor::dump_config(){
   }
   LOG_UPDATE_INTERVAL(this);
 
-  LOG_SENSOR("  ", "Temperature", this->temperature_sensor_);
+  LOG_SENSOR("  ", "Temperature", this->temperature_sensor);
   LOG_SENSOR("  ", "Pressure", this->pressure_sensor);
 }
 
