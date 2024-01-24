@@ -11,7 +11,13 @@ esphome:
   project:
     name: "AirGradient.Extended"
     version: "1.0.0"
-
+    
+external_components:
+  # Use the LPS22 Sensor External Component from our GitHub
+  - source: github://AeroSteveO/Air-Gradient-Extended
+    components: [ lps22_sensor ]
+    refresh: 0s
+    
 esp8266:
   board: esp01_1m
   framework:
@@ -58,19 +64,16 @@ binary_sensor:
     name: "Air Gradient Status"
 
 sensor:
-  - platform: custom
-    lambda: |-
-      auto my_sensor = new SensorLps22();
-      App.register_component(my_sensor);
-      return {my_sensor->temperature_sensor, my_sensor->pressure_sensor};
-    sensors:
-      - name: "LPS22 Temperature"
-        unit_of_measurement: °C
-        accuracy_decimals: 1
-      - name: "Pressure"
-        unit_of_measurement: hPa
-        accuracy_decimals: 2
-        id: pres
+  - platform: lps22_sensor
+    temperature:
+      name: "LPS22 Temperature"
+      unit_of_measurement: °C
+      accuracy_decimals: 1
+    pressure:
+      name: "Pressure"
+      unit_of_measurement: hPa
+      accuracy_decimals: 2
+      id: pres
   - platform: template
     name: "Pressure Above Sea Level"
     unit_of_measurement: hPa
