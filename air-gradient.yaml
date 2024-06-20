@@ -28,6 +28,7 @@ logger:
 api:
 
 ota:
+  platform: esphome
 
 dashboard_import:
   package_import_url: github://AeroSteveO/Air-Gradient-Extended/air-gradient.yaml
